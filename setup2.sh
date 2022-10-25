@@ -14,8 +14,8 @@ echo "========================"
 set -x
 rm rollingALBIngress_query.yaml
 rm rollingALBIngress_query2.yaml
-wget https://raw.githubusercontent.com/energy-been/rolling-k8s/main/rollingALBIngress-query.yml
-wget https://raw.githubusercontent.com/energy-been/rolling-k8s/main/rollingALBIngress-query2.yml
+wget https://raw.githubusercontent.com/energy-been/rolling-k8s/main/rollingALBIngress_query.yaml
+wget https://raw.githubusercontent.com/energy-been/rolling-k8s/main/rollingALBIngress_query2.yaml
 rm alb-ingress-controller.yaml
 kubectl delete svc/rolling-svc-alb-blue svc/rolling-svc-alb-green -n rolling-alb
 kubectl delete deploy/rolling-deploy-alb-blue deploy/rolling-deploy-alb-green -n rolling-alb
@@ -51,7 +51,7 @@ fi
 
 #Create Ingress Controller
 if [ ! -f alb-ingress-controller.yaml ]; then
-    wget https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.5/docs/examples/alb-ingress-controller.yaml
+    wget https://raw.githubusercontent.com/energy-been/rolling-k8s/main/alb-ingress-controller.yaml
 fi
 sed -i "s/devCluster/$CLUSTER_NAME/g" alb-ingress-controller.yaml
 sed -i "s/# - --cluster-name/- --cluster-name/g" alb-ingress-controller.yaml
